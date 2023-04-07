@@ -2,11 +2,11 @@
 
 The website was created using the following technologies:
 
--HTML
--CSS
--SCSS
--Bootstrap
--JavaScript
+- HTML
+- CSS
+- SCSS
+- Bootstrap
+- JavaScript
 
 The website can be viewed at JezioroSmarzewskie.pl
 
