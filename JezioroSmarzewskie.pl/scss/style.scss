@@ -1,0 +1,802 @@
+@import './color';
+@import './component';
+@import './mixin';
+
+*,
+* ::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+}
+
+.burger-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1em;
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    z-index: 1000;
+
+    &:focus {
+        outline: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+    }
+
+    &:hover {
+        .burger-btn__bars::after,
+        .burger-btn__bars::before {
+            width: 100%;
+        }
+    }
+
+    &__box {
+        position: relative;
+        width: 40px;
+        height: 30px;
+    }
+
+    &__bars,
+    &__bars::after,
+    &__bars::before {
+        @include burgerBtn;
+        background: rgba(101, 99, 247, 0.952);
+    }
+
+    &__bars {
+        width: 100%;
+
+        &::after {
+            top: 13px;
+            width: 60%;
+        }
+
+        &::before {
+            top: 27px;
+            width: 30%;
+            transition-delay: 0.1s;
+        }
+    }
+}
+
+.nav {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: 0.6s cubic-bezier(0.6, 0.05, 0.2, 1);
+    background-image: $nav-gradient;
+    z-index: 100;
+
+    &--active {
+        transform: translateX(0);
+    }
+
+    &__item {
+        position: relative;
+        display: block;
+        margin: 1em 0;
+        padding: 0em 2em;
+        font-size: 3rem;
+        color: $fontColor;
+        text-decoration: none;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            transform: scaleY(0);
+            background-color: $fontColor;
+            transition: transform 0.4s;
+            content: '';
+        }
+
+        &:hover::before {
+            transform: scaleY(1);
+        }
+    }
+}
+
+@keyframes navItemsAnimations {
+    from {
+        transform: translateX(200%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.nav__items-animation {
+    animation: navItemsAnimations 1s;
+}
+
+//header
+
+.header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    height: 100vh;
+    text-align: center;
+    color: $fontColor;
+    @include heroImages('../img/Lakelow.jpg');
+
+    .imgDotation {
+        position: absolute;
+        bottom: 30px;
+
+        .imgDotation-img {
+            width: 100%;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    &__heading {
+        font-family: 'Dancing Script', cursive;
+        font-size: 4.8rem;
+        font-weight: 300;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+    }
+
+    &__btn {
+        margin-top: 2em;
+        padding: 0.8em 1.6em;
+        background: $fontColor;
+        border-radius: 10px;
+        color: $secondColor;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &::before {
+            background-color: $btn-glass;
+        }
+    }
+}
+
+.header-dotation {
+    height: 50vh;
+}
+
+.dotation-second {
+    .image-dotation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .imageDotation {
+        .imageDotation-set {
+            height: 500px;
+            width: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    .textDotation {
+        margin-top: 5em;
+        padding: 1em 1em;
+        font-size: 2rem;
+        letter-spacing: 1.5px;
+        text-align: left;
+    }
+}
+
+//dreams
+
+.dreams {
+    &__box {
+        display: flex;
+        flex-direction: column;
+        margin: 2em 0;
+    }
+
+    &__img {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    &__title {
+        padding: 0 5em;
+        margin-bottom: 0.5em;
+        font-size: 2.4rem;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+    }
+}
+
+.under-line {
+    margin: 2rem auto 40px;
+    width: 30%;
+    height: 1px;
+    background: $secondColor;
+}
+
+.contact {
+    &__box {
+        background-color: $mainColor;
+        padding: 2em 0;
+
+        &-row {
+            &-item {
+                font-size: 2.4rem;
+            }
+        }
+    }
+}
+
+.footer {
+    margin-bottom: 0;
+
+    &__block {
+        background: $mainColor;
+        font-size: 2rem;
+    }
+}
+
+///////galerry
+
+.galery {
+    .box-galery {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+
+        .photoOne {
+            background-image: url('../img/galery/IMG_8016.jpg');
+        }
+
+        .photoTwo {
+            background-image: url('../img/jezioro.jpg');
+        }
+
+        .photoThree {
+            background-image: url('../img/galery/gdansk.jpg');
+        }
+
+        .boxOne {
+            position: relative;
+            width: 80%;
+            height: 450px;
+            margin: 5px 5px;
+            background-size: cover;
+            background-position: center;
+
+            .hero-beg {
+                z-index: 5;
+                height: 100%;
+                width: 100%;
+                background-color: rgba(34, 25, 25, 0.767);
+            }
+
+            .titlePhoto {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #fff;
+                z-index: 10;
+
+                a {
+                    text-decoration: none;
+                }
+
+                .titleOne {
+                    font-size: 4rem;
+                    text-transform: uppercase;
+                    color: rgb(241, 244, 247);
+                }
+            }
+        }
+    }
+}
+
+//gallery
+
+.houses {
+    .text-house {
+        text-align: center;
+        font-size: 2.3rem;
+        padding: 20px;
+    }
+
+    .house {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        .galery-image {
+            margin: 15px 5px;
+            width: 550px;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .one {
+            background-image: url('../lake/IMG_8269.jpg');
+        }
+
+        .two {
+            background-image: url('../lake/IMG_3157.jpg');
+        }
+
+        .three {
+            background-image: url('../lake/IMG_3089.jpg');
+        }
+
+        .four {
+            background-image: url('../lake/IMG_2592.jpg');
+        }
+
+        .five {
+            background-image: url('../lake/IMG_2521.jpg');
+        }
+
+        .six {
+            background-image: url('../lake/2020-08-17-06_01_17_367.PNG');
+        }
+
+        .seven {
+            background-image: url('../house/IMG_2472.jpg');
+        }
+
+        .eight {
+            background-image: url('../house/IMG_2518.jpg');
+        }
+
+        .nine {
+            background-image: url('../house/IMG_3365.jpg');
+        }
+
+        .ten {
+            background-image: url('../house/IMG_3368.jpg');
+        }
+
+        .eleven {
+            background-image: url('../house/IMG_3405.jpg');
+        }
+
+        .twelw {
+            background-image: url('../house/IMG_3442.jpg');
+        }
+
+        .thert {
+            background-image: url('../house/IMG_8045.jpg');
+        }
+
+        .fourten {
+            background-image: url('../img/new.jpg');
+        }
+
+        .sixten {
+            background-image: url('../img/galery/IMG_8012.jpg');
+        }
+
+        .for1 {
+            background-image: url('../img/galery/IMG_8007.jpg');
+        }
+
+        .for2 {
+            background-image: url('../img/galery/IMG_8002.jpg');
+        }
+
+        .for3 {
+            background-image: url('../img/galery/IMG_8003.jpg');
+        }
+
+        .for4 {
+            background-image: url('../img/galery/sleep.jpg');
+        }
+    }
+}
+
+//okolica
+
+.area {
+    &__card {
+        position: relative;
+        margin: 1em 0;
+        height: 450px;
+        color: $fontColor;
+        text-align: center;
+        perspective: 1000px;
+
+        &-text {
+            padding: 1em;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        &:hover {
+            .area__card-img {
+                transform: rotateY(-180deg);
+                opacity: 0;
+            }
+
+            .area__card-info {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        &-img {
+            padding: 2em;
+            height: 100%;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 2s, opacity 1s;
+
+            &--first {
+                background-image: $main-gradient, url('../img/galery/palplinLow.jpg');
+            }
+
+            &--second {
+                background-image: $main-gradient, url('../img/galery/gniew.jpg');
+            }
+
+            &--third {
+                background-image: $main-gradient, url('../img/galery/gdansk.jpg');
+            }
+
+            &--four {
+                background-image: $main-gradient, url('../img/galery/malbork.jpg');
+            }
+
+            &-title {
+                font-family: 'Dancing Script', cursive;
+                font-size: 2.8rem;
+            }
+
+            &-info {
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+                font-size: 1.8rem;
+
+                i {
+                    margin-right: 0.5em;
+                }
+            }
+        }
+
+        &-info {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-image: $main-gradient-solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(180deg);
+            transition: transform 1s, opacity 1s;
+
+            &-title {
+                @include areaCard;
+                top: 1.2em;
+                font-family: 'Dancing Script', cursive;
+                font-size: 2.8rem;
+            }
+
+            &-list {
+                margin: 0 auto;
+                width: 70%;
+                list-style: none;
+
+                &-item {
+                    padding: 1em;
+                    font-size: 1.4rem;
+                    border-bottom: 1px solid $fontColor;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            &-btn {
+                @include areaCard;
+                bottom: 2em;
+                padding: 1em;
+                border-radius: 8px;
+                width: 80%;
+                border: none;
+                background-color: gray;
+                cursor: pointer;
+
+                &::before {
+                    background-color: rgb(155, 154, 241);
+                }
+            }
+        }
+    }
+}
+
+//dotation
+
+.dotation {
+    &__box {
+        background-color: $mainColor;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2em auto;
+
+        &-img {
+            &-photo {
+                width: 350px;
+                margin: 1em auto;
+            }
+        }
+
+        &-title {
+            padding: 0 2em;
+            margin-bottom: 0.5em;
+            font-size: 3.8rem;
+            text-align: center;
+        }
+    }
+}
+
+//MEDIA
+
+@media (min-width: 576px) {
+    .dotation-second {
+        .imageDotation {
+            .imageDotation-set {
+                height: 600px;
+                width: 960px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+
+    .dotation {
+        &__box {
+            &-img {
+                &-photo {
+                    width: 550px;
+                    margin: 2em auto;
+                }
+            }
+
+            &-title {
+                font-size: 5rem;
+            }
+        }
+    }
+
+    .nav {
+        &__item {
+            margin: 0.5em 0;
+            padding: 0 0.5em;
+            font-size: 3.5rem;
+        }
+    }
+
+    .dreams {
+        &__box {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 1em;
+
+            &-text {
+                width: 55%;
+
+                &--right {
+                    text-align: right;
+                }
+            }
+
+            &-img {
+                width: 40%;
+
+                &--right {
+                    order: 1;
+                }
+            }
+        }
+
+        &__title {
+            padding: 0;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            font-size: 3.2rem;
+        }
+
+        &__img {
+            margin-bottom: 0;
+            min-height: 380px;
+        }
+    }
+}
+
+.reservation {
+    padding: 0.5em;
+    font-size: 2.4rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    .banner-image {
+        padding: 40px 20px;
+
+        .bannerOne {
+            .image-banner {
+                width: 100%;
+            }
+        }
+
+        .bannerTwo {
+            .image-bannerTwo {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .reservation {
+        font-size: 3.2rem;
+    }
+
+    .houses {
+        .house {
+            .galery-image {
+                width: 580px;
+                height: 600px;
+            }
+        }
+    }
+
+    .galery {
+        .box-galery {
+            flex-direction: row;
+
+            .boxOne {
+                width: 47%;
+
+                .titlePhoto {
+                    .titleOne {
+                        transition: transform 0.6s;
+                    }
+
+                    .titleOne:hover {
+                        transform: scale(1.6);
+                    }
+                }
+            }
+        }
+    }
+
+    .header {
+        .imgDotation {
+            width: 600px;
+        }
+
+        &__heading {
+            font-size: 6.6rem;
+        }
+
+        &__text {
+            font-size: 1.9rem;
+        }
+
+        &__btn {
+            font-size: 1.6rem;
+        }
+    }
+
+    .dreams {
+        &__text {
+            font-size: 1.8rem;
+        }
+    }
+
+    .area {
+        &__cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        &__card {
+            margin: 1em;
+            width: 48%;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .burger-btn {
+        top: 40px;
+        right: 50px;
+    }
+
+    .header {
+        background-image: $main-gradient, ('../img/LakeHight.jpg');
+
+        &__heading {
+            font-size: 8rem;
+        }
+    }
+
+    .dreams {
+        &__box {
+            margin: 5em 0;
+
+            &-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin-bottom: 2.5em;
+            }
+        }
+
+        &__title {
+            font-size: 3.6rem;
+        }
+
+        &__text {
+            font-size: 2.2rem;
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .area {
+        &__card {
+            width: 30%;
+        }
+    }
+}
